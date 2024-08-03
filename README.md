@@ -1,2 +1,2 @@
 # Go
-Learning Go
+Go Learning Journey
