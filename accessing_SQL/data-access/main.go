@@ -26,14 +26,10 @@ func main() {
 		log.Fatalf("Error loading .env file: %s", err_env)
 	}
 
-	DBUSER := os.Getenv("DBUSER")
-	DBPASS := os.Getenv("DBPASS")
-
-	fmt.Println(DBUSER, DBPASS)
 	// Capture connection properties.
 	cfg := mysql.Config{
-		User:                 DBUSER,
-		Passwd:               DBPASS,
+		User:                 os.Getenv("DBUSER"),
+		Passwd:               os.Getenv("DBPASS"),
 		Net:                  "tcp",
 		Addr:                 "127.0.0.1:33061",
 		DBName:               "recordings",
@@ -71,8 +67,9 @@ func main() {
 	})
 	if err != nil {
 		log.Println(err)
+	} else {
+		fmt.Printf("ID of added album: %v\n", addAlbum)
 	}
-	fmt.Printf("ID of added album: %v\n", addAlbum)
 }
 
 func albumsByArtist(name string) ([]Album, error) {
